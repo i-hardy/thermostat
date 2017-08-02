@@ -26,3 +26,7 @@ Thermostat.prototype.getMaxTemp = function () {
     return 32
   }
 };
+
+Thermostat.prototype.changePowerSavingMode = function () {
+  this.isPowerSavingModeOn = !this.isPowerSavingModeOn
+};

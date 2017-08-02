@@ -21,6 +21,15 @@ describe('Thermostat', function() {
       }
       expect(function() { thermostat.tempIncrease(); }).toThrow('Maximum temp reached')
     });
+
+    it('cannot pass 32 degrees if PowerSavingMode is off', function() {
+      var jimmy = new Thermostat;
+      jimmy.changePowerSavingMode();
+      for (var i = 0; i < 12; i++) {
+        jimmy.tempIncrease();
+      }
+      expect(function() { jimmy.tempIncrease(); }).toThrow('Maximum temp reached')
+    });
   });
 
   describe('tempDecrease', function() {
@@ -38,9 +47,21 @@ describe('Thermostat', function() {
     });
   });
 
-  describe('getMaxTemp', function() {
+  describe('#getMaxTemp', function() {
     it('returns what the current maximum temperature is', function() {
       expect(thermostat.getMaxTemp()).toEqual(25)
+    });
+  });
+
+  describe('#changePowerSavingMode', function() {
+    it('can turn PowerSavingMode off', function() {
+      thermostat.changePowerSavingMode();
+      expect(thermostat.isPowerSavingModeOn).toEqual(false);
+    });
+
+    it('can turn PowerSavingMode on', function() {
+      thermostat.changePowerSavingMode();
+      expect(thermostat.isPowerSavingModeOn).toEqual(true);
     });
   });
 });

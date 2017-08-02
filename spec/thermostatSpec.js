@@ -1,22 +1,29 @@
-describe('Thermostat', function() {
-  var thermostat = new Thermostat;
+'use strict';
 
-  it('has a temp', function() {
-    expect(thermostat.temp).toEqual(20);
+describe('Thermostat', function() {
+  var thermostat;
+
+  beforeEach(function () {
+    thermostat = new Thermostat
   });
 
   it('has a power saving mode that defaults to true', function() {
-    expect(thermostat.isPowerSavingModeOn).toBe(true);
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
   });
 
-  describe('tempIncrease', function() {
+  describe('#getCurrentTemp', function() {
+    it('returns the current temperature', function () {
+      expect(thermostat.getCurrentTemp()).toEqual(20)
+    });
+  });
+
+  describe('#tempIncrease', function() {
     it('can have its temperature increased', function() {
       thermostat.tempIncrease();
-      expect(thermostat.temp).toEqual(21);
+      expect(thermostat.getCurrentTemp()).toEqual(21);
     });
 
     it('does not increase temp above the max temperature', function() {
-      thermostat.reset();
       for (var i = 0; i < 5; i++) {
         thermostat.tempIncrease();
       }
@@ -33,15 +40,13 @@ describe('Thermostat', function() {
     });
   });
 
-  describe('tempDecrease', function() {
+  describe('#tempDecrease', function() {
     it('can have its temperature decreased', function() {
-      thermostat.reset();
       thermostat.tempDecrease();
-      expect(thermostat.temp).toEqual(19);
+      expect(thermostat.getCurrentTemp()).toEqual(19);
     });
 
     it('does not decrease temp below 10 degrees', function() {
-      thermostat.reset();
       for (var i = 0; i < 10; i++) {
         thermostat.tempDecrease();
       }
@@ -58,12 +63,13 @@ describe('Thermostat', function() {
   describe('#changePowerSavingMode', function() {
     it('can turn PowerSavingMode off', function() {
       thermostat.changePowerSavingMode();
-      expect(thermostat.isPowerSavingModeOn).toEqual(false);
+      expect(thermostat.isPowerSavingModeOn()).toEqual(false);
     });
 
     it('can turn PowerSavingMode on', function() {
-      thermostat.changePowerSavingMode();
-      expect(thermostat.isPowerSavingModeOn).toEqual(true);
+      for (var i = 0; i < 2; i++) {
+        thermostat.changePowerSavingMode(); }
+      expect(thermostat.isPowerSavingModeOn()).toEqual(true);
     });
   });
 
@@ -71,7 +77,7 @@ describe('Thermostat', function() {
     it('resets the temperature to 20', function() {
       thermostat.tempIncrease();
       thermostat.reset();
-      expect(thermostat.temp).toEqual(20)
+      expect(thermostat.getCurrentTemp()).toEqual(20)
     });
   });
 
@@ -84,13 +90,11 @@ describe('Thermostat', function() {
     });
 
     it('it is medium-usage when temp is between 18-25', function() {
-      thermostat.reset();
       expect(thermostat.currentEnergyUsage()).toEqual('medium');
     });
 
     it('it is high-usage when temp is greater 25', function() {
       thermostat.changePowerSavingMode();
-      thermostat.reset();
       for (var i = 0; i < 6; i++) {
         thermostat.tempIncrease();
       }

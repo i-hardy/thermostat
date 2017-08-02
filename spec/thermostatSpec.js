@@ -19,4 +19,11 @@ describe('Thermostat', function() {
       expect(thermostat2.temp).toEqual(19);
     });
   });
+
+  it('does not decrease temp below 10 degrees', function() {
+    for (var i = 0; i <= 10; i++) {
+      thermostat.tempDecrease();
+    }
+    expect(function() {thermostat.tempDecrease()} ).toThrow('Minimum temp reached!');
+  });
 });

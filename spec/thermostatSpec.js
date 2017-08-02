@@ -16,7 +16,8 @@ describe('Thermostat', function() {
     });
 
     it('does not increase temp above the max temperature', function() {
-      for (var i = 0; i < 4; i++) {
+      thermostat.reset();
+      for (var i = 0; i < 5; i++) {
         thermostat.tempIncrease();
       }
       expect(function() { thermostat.tempIncrease(); }).toThrow('Maximum temp reached')
@@ -33,17 +34,18 @@ describe('Thermostat', function() {
   });
 
   describe('tempDecrease', function() {
-    var thermostat2 = new Thermostat;
     it('can have its temperature decreased', function() {
-      thermostat2.tempDecrease();
-      expect(thermostat2.temp).toEqual(19);
+      thermostat.reset();
+      thermostat.tempDecrease();
+      expect(thermostat.temp).toEqual(19);
     });
 
     it('does not decrease temp below 10 degrees', function() {
-      for (var i = 0; i < 9; i++) {
-        thermostat2.tempDecrease();
+      thermostat.reset();
+      for (var i = 0; i < 10; i++) {
+        thermostat.tempDecrease();
       }
-      expect(function() {thermostat2.tempDecrease()} ).toThrow('Minimum temp reached!');
+      expect(function() {thermostat.tempDecrease()} ).toThrow('Minimum temp reached!');
     });
   });
 
@@ -62,6 +64,14 @@ describe('Thermostat', function() {
     it('can turn PowerSavingMode on', function() {
       thermostat.changePowerSavingMode();
       expect(thermostat.isPowerSavingModeOn).toEqual(true);
+    });
+  });
+
+  describe('#reset', function() {
+    it('resets the temperature to 20', function() {
+      thermostat.tempIncrease();
+      thermostat.reset();
+      expect(thermostat.temp).toEqual(20)
     });
   });
 });

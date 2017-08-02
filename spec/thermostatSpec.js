@@ -74,4 +74,27 @@ describe('Thermostat', function() {
       expect(thermostat.temp).toEqual(20)
     });
   });
+
+  describe('#currentEnergyUsage', function() {
+    it('it is low-usage when temp is < 18', function() {
+      for (var i = 0; i < 3; i++) {
+        thermostat.tempDecrease();
+      }
+      expect(thermostat.currentEnergyUsage()).toEqual('low');
+    });
+
+    it('it is medium-usage when temp is between 18-25', function() {
+      thermostat.reset();
+      expect(thermostat.currentEnergyUsage()).toEqual('medium');
+    });
+
+    it('it is high-usage when temp is greater 25', function() {
+      thermostat.changePowerSavingMode();
+      thermostat.reset();
+      for (var i = 0; i < 6; i++) {
+        thermostat.tempIncrease();
+      }
+      expect(thermostat.currentEnergyUsage()).toEqual('high');
+    });
+  });
 });

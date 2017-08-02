@@ -1,15 +1,28 @@
 function Thermostat() {
   this.temp = 20;
+  this.isPowerSavingModeOn = true
 }
 
 Thermostat.prototype.tempIncrease = function () {
-  this.temp++
+  if (this.temp === this.getMaxTemp()) {
+    throw 'Maximum temp reached'
+  } else {
+    this.temp++
+  }
 };
 
 Thermostat.prototype.tempDecrease = function () {
   if (this.temp === 10) {
     throw 'Minimum temp reached!'
   } else {
-  this.temp--
+    this.temp--
+  }
+};
+
+Thermostat.prototype.getMaxTemp = function () {
+  if (this.isPowerSavingModeOn) {
+    return 25
+  } else {
+    return 32
   }
 };

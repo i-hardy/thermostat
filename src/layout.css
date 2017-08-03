@@ -1,3 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+hr {
+  border-top: 10px solid #E23539;
+  width: 190%;
+}
+
+.temp {
+  line-height: 0%;
+  font-size: 100px;
+  position: absolute;
+  right: 50%;
+  top: 0px;
+  align-content: center;
+  text-align: right;
+}
+
+.tempbuttons {
+  position: absolute;
+  line-height: 10%;
+  right: 51%;
+  top: 40%;
+}
+
+.psm {
+  position: absolute;
+  font-size: 20px;
+  left: 25%;
+  bottom: 60%;
+  -webkit-transform: rotate(-90deg);
+}
+
+.weather1 {
+  position: absolute;
+  width: 25%;
+  bottom: 10%;
+  left: auto;
+}
+
+.weather2 {
+  position: absolute;
+  bottom: 7%;
+  right: 55%;
+}
+
+.vertical-text {
+  padding: 10px;
+  writing-mode: vertical-lr;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 100px;
+  color: #fff;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.vertical-text:hover {
+  -webkit-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
+  -ms-transform: rotate(-10deg);
+  transform: rotate(-10deg);
+}
+
+
+.sidebar {
+  background-color: #000000;
+  background-image: url('../assets/thermometer.png');
+  background-repeat: no-repeat;
+  background-position: 20%;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  width: 50%;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #E23539;
+}
+
+.button:active {
+  background-color: #000;
+  transform: translateY(4px);
+}
+
+.input {
+  border: 1px solid #E23539;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+}
+
+
 .low {
   color: green;
 }

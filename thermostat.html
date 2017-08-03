@@ -5,27 +5,45 @@
   <title>Thermostat</title>
 </head>
 <body>
-  <section>
+  <section class="sidebar">
+    <span class="vertical-text">degrees</span>
+  </section>
+  <section class="temp">
     <h1 id="temperature" class=""></h1>
+  </section>
+  <section class="tempbuttons">
+    <center>
+      <p><button id="temperature-up" class="button">+</button>
+      <button id="temperature-down" class="button">-</button></p>
+      <p><button id="temperature-reset" class="button">reset</button>
+      <button id="toggle-powersaving" class="button">PSM</button></p>
+    </center>
+  </section>
+  <section class="psm">
     <p>
-      <button id="temperature-up">+</button>
-      <button id="temperature-down">-</button>
-      <button id="temperature-reset">reset</button>
       power saving mode is <span id="power-saving-status">on</span>
-      <button id="toggle-powersaving">PSM</button>
     </p>
-    <h2>Current weather in <span id="current-city"></span></h2>
-    <h2><span id="current-weather"></span>&deg;C</h2>
     <p>
-      <button id="get-weather">Get weather</button>
+    </p>
+  </section>
+  <section class="weather1">
+    <hr>
+    <center>
+    <h2 id="current-city"></h2>
+    <h2><span id="current-weather"></span>&deg;C</h2>
+    <button id="get-weather" class="button">Get weather</button>
+    </center>
+  </section>
+  <section class="weather2">
+    <center>
       <form id="set-city" onsubmit="return false;">
         <label for="city-name">
-          Your city:
+          <h2>Enter city name:</h2>
         </label>
-        <input type="text" id="city-name">
-        <input type="submit" value="Submit">
+        <input type="text" id="city-name" class="input"><p>
+        <input type="submit" value="Submit" class="button"></p>
       </form>
-    </p>
+    </center>
   </section>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="src/thermostat.js"></script>

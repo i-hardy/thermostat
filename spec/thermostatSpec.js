@@ -4,7 +4,7 @@ describe('Thermostat', function() {
   var thermostat;
 
   beforeEach(function () {
-    thermostat = new Thermostat
+    thermostat = new Thermostat;
   });
 
   it('has a power saving mode that defaults to true', function() {

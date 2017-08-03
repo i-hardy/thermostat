@@ -14,6 +14,18 @@
       power saving mode is <span id="power-saving-status">on</span>
       <button id="toggle-powersaving">PSM</button>
     </p>
+    <h2>Current weather in <span id="current-city"></span></h2>
+    <h2><span id="current-weather"></span>&deg;C</h2>
+    <p>
+      <button id="get-weather">Get weather</button>
+      <form id="set-city" onsubmit="return false;">
+        <label for="city-name">
+          Your city:
+        </label>
+        <input type="text" id="city-name">
+        <input type="submit" value="Submit">
+      </form>
+    </p>
   </section>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="src/thermostat.js"></script>

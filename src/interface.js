@@ -3,7 +3,7 @@ $(document).ready(function() {
   var currentTemp;
   var currentCity = 'London';
   var weatherRequest;
-  getLastTemperature();
+  getPreviousState();
   updateTemperature();
   getWeather();
 
@@ -24,6 +24,7 @@ $(document).ready(function() {
 
   $('#toggle-powersaving').on('click', function () {
     thermostat.changePowerSavingMode();
+    postThermostatState();
     updatePSM();
   });
 
@@ -38,20 +39,26 @@ $(document).ready(function() {
     getWeather();
   });
 
-  function getLastTemperature() {
-    $.get('http://localhost:9292/thermostat', function (response) {
-      if(response) {
-        thermostat = Object.assign(new Thermostat(), JSON.parse(response));
+  function getPreviousState() {
+    $.get('http://localhost:9292/thermostat', function (previousState) {
+      if(previousState) {
+        var response = JSON.parse(previousState);
+        thermostat = Object.assign(new Thermostat(), JSON.parse(response.thermostat));
+        currentCity = response.city;
         updateTemperature();
         updatePSM();
       }
     });
   }
 
+  function postThermostatState() {
+    $.post('http://localhost:9292/thermostat', {thermostat: JSON.stringify(thermostat), city: currentCity});
+  }
+
   function updateTemperature() {
     $('#temperature').text(thermostat.getCurrentTemp());
     $('#temperature').attr('class', thermostat.currentEnergyUsage());
-    $.post('http://localhost:9292/thermostat', JSON.stringify(thermostat), 'json');
+    postThermostatState();
   }
 
   function getWeather() {

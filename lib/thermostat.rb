@@ -1,9 +1,12 @@
+require "json"
+
 class SavedThermostat
-  def self.create(json)
-    @json = json
+  def self.create(thermostat, city)
+    @thermostat = thermostat
+    @city = city
   end
 
   def self.return
-    @json
+    {thermostat: @thermostat, city: @city}.to_json
   end
 end

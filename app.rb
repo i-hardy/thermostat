@@ -9,7 +9,7 @@ class Thermostat < Sinatra::Base
 
   post '/thermostat' do
     response['Access-Control-Allow-Origin'] = '*'
-    SavedThermostat.create(params.keys[0])
+    SavedThermostat.create(params[:thermostat], params[:city])
   end
 
   get '/thermostat' do

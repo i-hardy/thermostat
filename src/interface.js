@@ -3,6 +3,7 @@ $(document).ready(function() {
   var currentTemp;
   var currentCity = 'London';
   var weatherRequest;
+  getLastTemperature();
   updateTemperature();
   getWeather();
 
@@ -23,11 +24,7 @@ $(document).ready(function() {
 
   $('#toggle-powersaving').on('click', function () {
     thermostat.changePowerSavingMode();
-    if(thermostat.isPowerSavingModeOn()) {
-      $('#power-saving-status').text('on');
-    } else {
-      $('#power-saving-status').text('off');
-    }
+    updatePSM();
   });
 
   $('#get-weather').on('click', function() {
@@ -37,12 +34,24 @@ $(document).ready(function() {
   $('#set-city').submit(function(event) {
     event.preventDefault();
     currentCity = $('#city-name').val();
+    $('#city-name').val('');
     getWeather();
   });
+
+  function getLastTemperature() {
+    $.get('http://localhost:9292/thermostat', function (response) {
+      if(response) {
+        thermostat = Object.assign(new Thermostat(), JSON.parse(response));
+        updateTemperature();
+        updatePSM();
+      }
+    });
+  }
 
   function updateTemperature() {
     $('#temperature').text(thermostat.getCurrentTemp());
     $('#temperature').attr('class', thermostat.currentEnergyUsage());
+    $.post('http://localhost:9292/thermostat', JSON.stringify(thermostat), 'json');
   }
 
   function getWeather() {
@@ -53,6 +62,14 @@ $(document).ready(function() {
         currentTemp = apiResponse.main.temp;
         updateWeather();
       });
+  }
+
+  function updatePSM() {
+    if(thermostat.isPowerSavingModeOn()) {
+      $('#power-saving-status').text('on');
+    } else {
+      $('#power-saving-status').text('off');
+    }
   }
 
   function updateWeather() {

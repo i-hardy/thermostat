@@ -12,3 +12,5 @@ $ bundle
 $ rackup
 $ open thermostat.html
 ```
+### Appearance
+![screenshot](http://imgur.com/PuOwsHH.jpg)
